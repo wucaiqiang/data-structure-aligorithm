@@ -174,6 +174,22 @@ public class NodeTreeSolution {
         return current;
     }
 
+    /**
+     * 获取深度
+     *
+     * @param node
+     * @return
+     */
+    public int getHeight(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        int left = getHeight(node.leftChild);
+        int right = getHeight(node.rightChild);
+        int result =(left > right ? left : right)+1;
+        return result;
+    }
+
     static class Node {
         private Integer value;
         private Node leftChild;
@@ -212,7 +228,9 @@ public class NodeTreeSolution {
 //        System.out.println(node.value);
 //        nodeTreeSolution.delete(2);
 //        nodeTreeSolution.delete(10);
-        nodeTreeSolution.delete(15);
-        nodeTreeSolution.midIterator(nodeTreeSolution.root);
+//        nodeTreeSolution.delete(15);
+//        nodeTreeSolution.midIterator(nodeTreeSolution.root);
+        int height = nodeTreeSolution.getHeight(nodeTreeSolution.root);
+        System.out.println(height);
     }
 }
