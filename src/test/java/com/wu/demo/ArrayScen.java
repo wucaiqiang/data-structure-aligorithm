@@ -154,6 +154,32 @@ public class ArrayScen {
         return sum;
     }
 
+    private int pre = 0, cur = 0;
+
+    /**
+     * 斐波那契数
+     *
+     * @param x
+     * @return
+     */
+    public int fib(int x) {
+        if (x <= 2) {
+            return x - 1;
+        }
+        return recursive(x);
+    }
+
+    public int recursive(int x) {
+        int idex_0 = 0, idex_1 = 1;
+        if (x == 2) {
+            return idex_1 + idex_0;
+        }
+        int result = recursive(x - 1);
+        this.cur = result + this.pre;
+        this.pre = result;
+        return cur;
+    }
+
     //滑动窗口代码
     int window(int[] arr, int len) {
         int i = 0;//左指针
@@ -176,8 +202,9 @@ public class ArrayScen {
         ArrayScen arrayDemo = new ArrayScen();
         /*int[] arr = {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0};
         System.out.println(arrayDemo.longestOnes(arr, 2));*/
-        int[] arr = {1, 5, 6, 7, 8, 10, 6, 5, 6};
-        System.out.println(arrayDemo.longestSubarray(arr, 4));
+//        int[] arr = {1, 5, 6, 7, 8, 10, 6, 5, 6};
+//        System.out.println(arrayDemo.longestSubarray(arr, 4));
+        System.out.println(arrayDemo.fib(6));
     }
 
 }
