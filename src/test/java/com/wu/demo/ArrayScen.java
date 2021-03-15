@@ -198,13 +198,88 @@ public class ArrayScen {
         return ssum;
     }
 
+    public int searchTarget(int[] nums, int target) {
+        if (nums == null) {
+            return -1;
+        }
+        int n = nums.length;
+        if (n == 1) {
+            if (nums[0] == target) {
+                return 0;
+            }
+        }
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = (right - left) / 2 + left;
+            if (nums[mid] == target) {
+                return mid;
+            }
+            if (nums[left] == target) {
+                return left;
+            }
+            if (nums[right] == target) {
+                return right;
+            }
+            if (nums[mid] < nums[right]) {
+                if (target < nums[mid] || nums[right] < target) {
+                    right = mid;
+                } else {
+                    left = mid;
+                }
+            } else if (nums[left] < nums[mid]) {
+                if (nums[left] < target && target < nums[right]) {
+                    right = mid;
+                } else {
+                    left = mid;
+                }
+            } else {
+                right = right - 1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 旋转有序数据，查询最小
+     *
+     * @param nums
+     * @return
+     */
+    public int searchMin(int[] nums) {
+        if (nums == null) {
+            return -1;
+        }
+        int n = nums.length;
+        if (n == 1) {
+            return nums[0];
+        }
+        int left = 0, right = n - 1;
+        while (left < right) {
+            if (right - left == 1) {
+                return Math.min(nums[left], nums[right]);
+            }
+            int mid = (right - left) / 2 + left;
+            if (nums[mid] < nums[right]) {
+                right = mid;
+            } else if (nums[mid] > nums[right]) {
+                left = mid;
+            } else {
+                right = right - 1;
+            }
+        }
+        return nums[left];
+    }
+
     public static void main(String[] args) {
         ArrayScen arrayDemo = new ArrayScen();
         /*int[] arr = {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0};
         System.out.println(arrayDemo.longestOnes(arr, 2));*/
 //        int[] arr = {1, 5, 6, 7, 8, 10, 6, 5, 6};
 //        System.out.println(arrayDemo.longestSubarray(arr, 4));
-        System.out.println(arrayDemo.fib(6));
+//        System.out.println(arrayDemo.fib(6));
+        int[] arr = {6, 7, 8, 0, 1, 2, 3};
+//        int[] arr = {3, 1, 1};
+        System.out.println(arrayDemo.searchTarget(arr, 6));
     }
 
 }
