@@ -234,6 +234,7 @@ public class ArrayScen {
                 }
             } else {
                 right = right - 1;
+
             }
         }
         return -1;
